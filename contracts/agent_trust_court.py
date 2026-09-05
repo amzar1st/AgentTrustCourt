@@ -1,3 +1,5 @@
+# { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
+
 """AgentTrust Court: evidence-based reputation adjudication for AI agents.
 
 The contract keeps the economic and reputation state on GenLayer while using
