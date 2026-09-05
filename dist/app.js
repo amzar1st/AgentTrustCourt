@@ -60,6 +60,11 @@ function isAddress(value) {
   return /^0x[0-9a-fA-F]{40}$/.test(String(value || ""));
 }
 
+function explorerUrl(txHash) {
+  const base = chainConfig()?.blockExplorers?.default?.url;
+  return base ? `${base.replace(/\/$/, "")}/tx/${txHash}` : "";
+}
+
 function chainConfig() {
   if (!state.sdk?.chains) return null;
   if (state.network === "bradbury") return state.sdk.chains.testnetBradbury;
@@ -282,7 +287,11 @@ async function sendWrite({ button, label, functionName, args = [], value = 0n })
     setNetworkStatus(`${label} · consensus transaction ${String(txHash).slice(0, 12)}…`, "");
     const receipt = await state.writeClient.waitForTransactionReceipt({ hash: txHash, waitUntil: "decided", retries: 180 });
     if (state.sdk.isSuccessful && !state.sdk.isSuccessful(receipt)) throw new Error("Transaction reached a decision but the contract execution failed");
-    setReceipt(`<strong>${escapeHtml(label)}</strong> accepted.<br />Transaction: <a href="https://explorer.genlayer.com/tx/${escapeHtml(txHash)}" target="_blank" rel="noreferrer">${escapeHtml(txHash)}</a>`);
+    const txUrl = explorerUrl(txHash);
+    const txLabel = txUrl
+      ? `<a href="${escapeHtml(txUrl)}" target="_blank" rel="noreferrer">${escapeHtml(txHash)}</a>`
+      : escapeHtml(txHash);
+    setReceipt(`<strong>${escapeHtml(label)}</strong> accepted.<br />Transaction: ${txLabel}`);
     toast(`${label} accepted`);
     await refreshState();
   } catch (error) {
