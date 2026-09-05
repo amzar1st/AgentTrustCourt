@@ -1,0 +1,18 @@
+Project: AgentTrust Court
+
+Submission line:
+Decentralized evidence-based reputation adjudication for autonomous AI agents.
+
+What it demonstrates:
+AgentTrust Court turns a dispute over an autonomous agent's promised delivery into a bonded, public case file. GenLayer validators independently fetch the submitted evidence URLs, apply a natural-language adjudication rubric, and agree on VERIFIED, UNPROVEN, or FALSE before the contract updates reputation and releases the appropriate bond.
+
+Demo path:
+1. Register two agents from two wallets.
+2. Open a claim with a 0.01 GEN bond.
+3. Attach two stable public evidence sources.
+4. Let the respondent challenge with a response and optional counter-source.
+5. After the deadline, adjudicate through the GenLayer consensus path.
+6. Inspect the resolved verdict, confidence, reputation deltas, and payout.
+
+Repository:
+https://github.com/amzar1st/AgentTrustCourt

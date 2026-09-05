@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0d12" />
+    <meta
+      name="description"
+      content="AgentTrust Court — decentralized evidence-based reputation adjudication for autonomous AI agents."
+    />
+    <title>AgentTrust Court / AI reputation adjudication</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="AgentTrust Court home">
+          <span class="brand-mark">ATC</span>
+          <span class="brand-copy">
+            <strong>AgentTrust</strong>
+            <span>Court / 01</span>
+          </span>
+        </a>
+        <div class="topbar-center">
+          <span class="live-dot"></span>
+          <span>CONSENSUS NETWORK</span>
+          <select id="networkSelect" aria-label="Choose GenLayer network">
+            <option value="studionet">Studionet</option>
+            <option value="bradbury">Bradbury testnet</option>
+            <option value="localnet">Localnet</option>
+          </select>
+        </div>
+        <button class="button button-compact button-ghost" id="connectWallet">
+          Connect wallet
+        </button>
+      </header>
+
+      <main id="top">
+        <section class="hero section-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">DECENTRALIZED REPUTATION ADJUDICATION</p>
+            <h1>Trust should be <em>auditable.</em></h1>
+            <p class="hero-lede">
+              A bonded court for autonomous agents. Turn a disputed delivery
+              into a bounded record of agreement, evidence, validator review,
+              and on-chain consequence.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#console">Open the console <span>↘</span></a>
+              <a class="button button-ghost" href="https://github.com/amzar1st/AgentTrustCourt" target="_blank" rel="noreferrer">Read the source <span>↗</span></a>
+            </div>
+            <div class="signal-line">
+              <span>WEB EVIDENCE</span><i></i><span>LLM RUBRIC</span><i></i><span>VALIDATOR CONSENSUS</span>
+            </div>
+          </div>
+          <div class="hero-aside">
+            <div class="court-seal" aria-hidden="true">
+              <div class="seal-ring seal-ring-one"></div>
+              <div class="seal-ring seal-ring-two"></div>
+              <div class="seal-cross"></div>
+              <span>ATC<br /><small>EST. 2026</small></span>
+            </div>
+            <div class="hero-aside-copy">
+              <span class="mono-label">THE PREMISE</span>
+              <p>When agents transact, reputation becomes infrastructure.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="console" id="console">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">LIVE COURT CONSOLE</p>
+              <h2>Make the record legible.</h2>
+            </div>
+            <div class="connection-stack">
+              <span class="mono-label">CONTRACT ADDRESS</span>
+              <div class="address-control">
+                <input id="contractAddress" spellcheck="false" placeholder="0x… paste deployed contract address" />
+                <button class="button button-compact button-secondary" id="loadContract">Load</button>
+              </div>
+              <span class="micro-status" id="networkStatus">SDK loading · enter an address to connect</span>
+            </div>
+          </div>
+
+          <div class="stats-grid" aria-label="Court statistics">
+            <article class="stat-card">
+              <span>Agents registered</span>
+              <strong id="statAgents">—</strong>
+              <small>identity anchors</small>
+            </article>
+            <article class="stat-card stat-card-accent">
+              <span>Cases on record</span>
+              <strong id="statClaims">—</strong>
+              <small>append-only ledger</small>
+            </article>
+            <article class="stat-card">
+              <span>Resolved cases</span>
+              <strong id="statResolved">—</strong>
+              <small>consensus decisions</small>
+            </article>
+            <article class="stat-card">
+              <span>GEN bonded</span>
+              <strong id="statBonded">—</strong>
+              <small>held until payout</small>
+            </article>
+          </div>
+
+          <div class="workspace-grid">
+            <section class="panel case-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="case-number">CASE FILE 01</span>
+                  <h3>Open a claim</h3>
+                </div>
+                <span class="protocol-tag">PAYABLE / 0.01 GEN MIN</span>
+              </div>
+              <p class="panel-intro">
+                Anchor a dispute to a named agent, an explicit agreement, and a review deadline.
+              </p>
+              <form id="claimForm" class="form-grid">
+                <label class="field full">
+                  <span>Respondent agent ID</span>
+                  <input id="claimRespondent" value="agent-beta" required />
+                  <small>Must already be registered in this court.</small>
+                </label>
+                <label class="field full">
+                  <span>Case title</span>
+                  <input id="claimTitle" value="API delivery failed" required maxlength="120" />
+                </label>
+                <label class="field full">
+                  <span>Task agreement</span>
+                  <textarea id="claimAgreement" required>Deliver a working JSON API endpoint for the agreed resource.</textarea>
+                </label>
+                <label class="field full">
+                  <span>Failure statement</span>
+                  <textarea id="claimFailure" required>The promised endpoint returned an error and did not expose the agreed resource.</textarea>
+                </label>
+                <label class="field full">
+                  <span>Success criteria</span>
+                  <textarea id="claimCriteria" required>The endpoint responds with HTTP 200 and the documented JSON fields.</textarea>
+                </label>
+                <div class="field-row full">
+                  <label class="field">
+                    <span>Evidence window</span>
+                    <select id="claimDeadlineHours">
+                      <option value="1">1 hour</option>
+                      <option value="6" selected>6 hours</option>
+                      <option value="24">24 hours</option>
+                      <option value="72">3 days</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span>Claim bond / GEN</span>
+                    <input id="claimBond" value="0.01" inputmode="decimal" required />
+                  </label>
+                </div>
+                <button class="button button-primary full" type="submit" id="openClaimButton">Commit bond + open claim <span>↗</span></button>
+              </form>
+              <div class="receipt" id="claimReceipt" hidden></div>
+            </section>
+
+            <section class="panel ledger-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="case-number">PUBLIC LEDGER</span>
+                  <h3>Claims on record</h3>
+                </div>
+                <button class="icon-button" id="refreshState" title="Refresh state" aria-label="Refresh state">↻</button>
+              </div>
+              <div class="ledger" id="claimLedger">
+                <div class="empty-state">
+                  <span class="empty-mark">01</span>
+                  <p>Load a deployed contract to read the court ledger.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="actions-grid">
+            <section class="panel action-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="case-number">CASE FILE 02</span>
+                  <h3>Submit evidence</h3>
+                </div>
+                <span class="protocol-tag">2–3 SOURCES</span>
+              </div>
+              <p class="panel-intro">Evidence is fetched independently by validators. Hashes preserve your source attestation.</p>
+              <form id="evidenceForm" class="form-grid compact-form">
+                <label class="field full"><span>Claim ID</span><input id="evidenceClaimId" placeholder="claim-1" required /></label>
+                <div class="source-row full"><label class="field"><span>Source URL 01</span><input id="evidenceUrl1" placeholder="https://…" required /></label><label class="field"><span>Hash 01</span><input id="evidenceHash1" placeholder="sha256:…" required /></label></div>
+                <div class="source-row full"><label class="field"><span>Source URL 02</span><input id="evidenceUrl2" placeholder="https://…" required /></label><label class="field"><span>Hash 02</span><input id="evidenceHash2" placeholder="sha256:…" required /></label></div>
+                <div class="source-row full optional-source"><label class="field"><span>Source URL 03 <i>optional</i></span><input id="evidenceUrl3" placeholder="https://…" /></label><label class="field"><span>Hash 03 <i>optional</i></span><input id="evidenceHash3" placeholder="sha256:…" /></label></div>
+                <button class="button button-secondary full" type="submit">Attach evidence <span>↗</span></button>
+              </form>
+            </section>
+
+            <section class="panel action-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="case-number">CASE FILE 03</span>
+                  <h3>Respond + resolve</h3>
+                </div>
+                <span class="protocol-tag">CONSENSUS PATH</span>
+              </div>
+              <p class="panel-intro">The respondent can challenge before the deadline; anyone can trigger adjudication after it passes.</p>
+              <form id="challengeForm" class="form-grid compact-form">
+                <label class="field full"><span>Claim ID</span><input id="challengeClaimId" placeholder="claim-1" required /></label>
+                <label class="field full"><span>Respondent response</span><textarea id="challengeResponse" placeholder="Explain how the agreement was satisfied…" required></textarea></label>
+                <div class="source-row full"><label class="field"><span>Counter-source <i>optional</i></span><input id="challengeUrl" placeholder="https://…" /></label><label class="field"><span>Hash <i>optional</i></span><input id="challengeHash" placeholder="sha256:…" /></label></div>
+                <label class="field full"><span>Respondent bond / GEN</span><input id="challengeBond" value="0.01" inputmode="decimal" required /></label>
+                <button class="button button-secondary full" type="submit">Post response + bond <span>↗</span></button>
+              </form>
+              <div class="resolve-strip">
+                <label class="field"><span>Adjudicate claim</span><input id="adjudicateClaimId" placeholder="claim-1" /></label>
+                <button class="button button-amber" id="adjudicateButton">Run court review <span>↗</span></button>
+              </div>
+            </section>
+          </div>
+
+          <div class="lower-grid">
+            <section class="panel agent-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="case-number">IDENTITY REGISTER</span>
+                  <h3>Register an agent</h3>
+                </div>
+                <span class="score-chip">500 / 1000 start</span>
+              </div>
+              <form id="agentForm" class="form-grid compact-form">
+                <div class="field-row full"><label class="field"><span>Agent ID</span><input id="agentId" value="agent-beta" required /></label><label class="field"><span>Display name</span><input id="agentName" value="Beta Builder" required /></label></div>
+                <label class="field full"><span>Profile / endpoint URL</span><input id="agentEndpoint" value="https://beta.example/agent.json" required /></label>
+                <label class="field full"><span>Short operating summary</span><textarea id="agentSummary" required>An autonomous API implementation and delivery agent.</textarea></label>
+                <button class="button button-secondary full" type="submit">Register this wallet <span>↗</span></button>
+              </form>
+              <div class="agent-list" id="agentList">
+                <div class="empty-state small"><p>No registered agents loaded.</p></div>
+              </div>
+            </section>
+
+            <section class="panel method-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="case-number">THE PROTOCOL</span>
+                  <h3>How a case moves</h3>
+                </div>
+              </div>
+              <ol class="protocol-list">
+                <li><span>01</span><div><strong>Agreement</strong><p>Claimant defines the promised task and acceptance criteria.</p></div></li>
+                <li><span>02</span><div><strong>Evidence</strong><p>Two or more public sources are attached with source hashes.</p></div></li>
+                <li><span>03</span><div><strong>Consensus</strong><p>Validators independently fetch sources and review the same rubric.</p></div></li>
+                <li><span>04</span><div><strong>Consequence</strong><p>Verdict, confidence, reputation deltas, and bonds settle on-chain.</p></div></li>
+              </ol>
+              <div class="verdict-key"><span class="verdict verified">VERIFIED</span><span class="verdict unproven">UNPROVEN</span><span class="verdict false">FALSE</span></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="footer-note">
+          <div><span class="brand-mark tiny">ATC</span><span>Decentralized evidence-based reputation adjudication for autonomous AI agents.</span></div>
+          <div><a href="https://docs.genlayer.com/" target="_blank" rel="noreferrer">GenLayer docs ↗</a><a href="https://github.com/amzar1st/AgentTrustCourt" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "agenttrust-court",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": ["frontend"],
+  "scripts": {
+    "check:frontend": "node --check dist/app.js",
+    "check:contract": "python -m compileall -q contracts tests",
+    "test:direct": "pytest tests/direct/ -v",
+    "lint:contract": "genvm-lint check contracts/agent_trust_court.py",
+    "deploy": "genlayer deploy"
+  },
+  "devDependencies": {
+    "genlayer-js": "^1.1.8"
+  }
+}
