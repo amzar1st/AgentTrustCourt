@@ -1,0 +1,23 @@
+{
+  "network": "studionet",
+  "contract_address": "0x65967F7Cc6b3BE9a1D49B0852ec1d5a29c8Bd155",
+  "deployment_transaction": "0xdd30da58e94fcff2d246f9c82ea92a4f4437aa29ff2b9143473a25b6fe59e02e",
+  "contract_explorer_url": "https://explorer-studio.genlayer.com/address/0x65967F7Cc6b3BE9a1D49B0852ec1d5a29c8Bd155",
+  "transaction_explorer_url": "https://explorer-studio.genlayer.com/tx/0xdd30da58e94fcff2d246f9c82ea92a4f4437aa29ff2b9143473a25b6fe59e02e",
+  "contract_source": "contracts/agent_trust_court.py",
+  "studio_filename": "agent_trust_court_final.py",
+  "constructor_arguments": [],
+  "status": "FINALIZED",
+  "verified_read": {
+    "method": "get_stats",
+    "result": {
+      "agent_count": 0,
+      "claim_count": 0,
+      "contract_balance": 0,
+      "resolved_claim_count": 0,
+      "total_bonded": 0,
+      "verified_claim_count": 0
+    }
+  },
+  "deployed_at": "2026-09-06"
+}

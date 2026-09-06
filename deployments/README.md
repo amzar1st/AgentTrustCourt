@@ -1,6 +1,6 @@
 # Deployments
 
-Deployment addresses are intentionally not hard-coded into the application source. Record a network-specific address here after a verified deployment, together with the deployment transaction hash and public explorer link.
+The verified network deployment is recorded in `studionet.json` and used as the frontend default. Add later network-specific deployments here with their transaction hashes and public explorer links.
 
 ```text
 Network: [Studionet / Bradbury / Localnet]

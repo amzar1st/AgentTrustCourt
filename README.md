@@ -71,6 +71,14 @@ The direct tests use the GenLayer testing suite’s web and LLM mocks. They do n
 
 ## Deploy the contract
 
+### Verified Studionet deployment
+
+- Contract: [`0x65967F7Cc6b3BE9a1D49B0852ec1d5a29c8Bd155`](https://explorer-studio.genlayer.com/address/0x65967F7Cc6b3BE9a1D49B0852ec1d5a29c8Bd155)
+- Deployment transaction: [`0xdd30da58e94fcff2d246f9c82ea92a4f4437aa29ff2b9143473a25b6fe59e02e`](https://explorer-studio.genlayer.com/tx/0xdd30da58e94fcff2d246f9c82ea92a4f4437aa29ff2b9143473a25b6fe59e02e)
+- Status: `FINALIZED`
+- Constructor: no arguments
+- Smoke test: `get_stats` returned the expected empty court state with zero agents, claims, resolved claims, verified claims, bonded GEN, and contract balance.
+
 The contract constructor takes no arguments. With the GenLayer CLI configured:
 
 ```bash
@@ -94,7 +102,7 @@ Stable evidence sources should be immutable GitHub raw files or versioned pages.
 
 ## Public console
 
-The source of the console is tracked in `dist/` so it can be served as a static Site without a build step. It deliberately starts without a hard-coded contract address: the address is deployment-specific and is saved in the browser after the user loads it.
+The source of the console is tracked in `dist/` so it can be served as a static Site without a build step. It starts on Studionet with the verified deployment address above and preserves a replacement address in local browser storage if the user loads another deployment.
 
 The console provides:
 

@@ -1,12 +1,19 @@
 const SDK_URL = "https://esm.sh/genlayer-js@1.1.8?bundle";
 const WEI_PER_GEN = 10n ** 18n;
+const DEPLOYED_CONTRACT_ADDRESS = "0x65967F7Cc6b3BE9a1D49B0852ec1d5a29c8Bd155";
+const INITIAL_NETWORK = ["studionet", "bradbury", "localnet"].includes(localStorage.getItem("atc-network"))
+  ? localStorage.getItem("atc-network") : "studionet";
+
+function savedContract(network) {
+  return localStorage.getItem(`atc-contract-${network}`) || (network === "studionet" ? DEPLOYED_CONTRACT_ADDRESS : "");
+}
 
 const $ = (id) => document.getElementById(id);
 const state = {
   sdk: null,
   sdkError: null,
-  network: localStorage.getItem("atc-network") || "studionet",
-  contractAddress: localStorage.getItem("atc-contract") || "",
+  network: INITIAL_NETWORK,
+  contractAddress: savedContract(INITIAL_NETWORK),
   account: null,
   readClient: null,
   writeClient: null,
@@ -109,8 +116,10 @@ function setBusy(button, busy, label) {
 async function loadSdk() {
   try {
     state.sdk = await import(SDK_URL);
-    setNetworkStatus("SDK ready · enter a deployed contract address", "ready");
+    setNetworkStatus("SDK ready · loading the deployed court", "ready");
     rebuildClients();
+    if (isAddress(state.contractAddress)) await refreshState();
+    else setNetworkStatus("Load a contract address for this network", "ready");
   } catch (error) {
     state.sdkError = error;
     setNetworkStatus("SDK unavailable · check browser network access", "error");
@@ -129,6 +138,14 @@ function rebuildClients() {
 function setNetwork(network) {
   state.network = network;
   localStorage.setItem("atc-network", network);
+  state.contractAddress = savedContract(network);
+  $("contractAddress").value = state.contractAddress;
+  state.stats = null;
+  state.agents = {};
+  state.claims = {};
+  renderStats(null);
+  renderAgents({});
+  renderClaims({});
   rebuildClients();
   const selected = $("networkSelect");
   selected.value = network;
@@ -140,11 +157,11 @@ function setContractAddress(value) {
   const address = String(value || "").trim();
   state.contractAddress = address;
   $("contractAddress").value = address;
-  if (address) localStorage.setItem("atc-contract", address);
   if (!isAddress(address)) {
     setNetworkStatus("Address format not recognized", "error");
     return;
   }
+  localStorage.setItem(`atc-contract-${state.network}`, address);
   if (!state.sdk) { setNetworkStatus("Loading GenLayerJS…"); return; }
   rebuildClients();
   refreshState();
@@ -376,6 +393,10 @@ function bindForms() {
       rebuildClients();
       renderClaims(state.claims);
     });
+    window.ethereum.on("chainChanged", () => {
+      rebuildClients();
+      if (isAddress(state.contractAddress)) refreshState();
+    });
   }
 }
 
@@ -383,4 +404,3 @@ $("contractAddress").value = state.contractAddress;
 bindForms();
 renderStats(null);
 loadSdk();
-if (state.contractAddress && isAddress(state.contractAddress)) setTimeout(refreshState, 300);
